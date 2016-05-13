@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Property Endpoint</title>
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW" />
+<!-- CSS styles for standard search box -->
+</head>
+<body>
+	<!-- HTML for SEARCH BAR -->
+	<div id="tfheader">
+		<p>Find properties within 20 miles! Put in Latitude and Longitude.</p>
+	</div>
+
+	<form id="frm1" action="form_action.asp">
+  Latitude: <input type="text" name="lat" ><br><br>
+  Longitude: <input type="text" name="lon" ><br><br>
+ 
+</form> 
+
+<button onclick="getInput()">Find Properties</button>
+
+<p id="answer"></p>
+
+<p id="answer2"></p>
+<p id="answer3"></p>
+<p id="answer4"></p>
+
+<script>
+
+
+
+function getInput() {
+    var x = document.getElementById("frm1");
+    var text = "<p>Your Property Coordinates</p>";
+    var i;
+    for (i = 0; i < x.length ;i++) {
+
+        text += x.elements[i].value + "<br>";
+    }
+    document.getElementById("answer").innerHTML = text;
+
+    var latnum = x.elements[0].value;
+    var lonnum = x.elements[1].value;
+
+    var lat1 = parseFloat(latnum);
+    var lon1 = parseFloat(lonnum);
+
+    var lat2 = 37.802378;
+	var lon2 =  -122.405823;
+	
+	 function distance(lat1, lon1, lat2, lon2) { 
+        var radlat1 = Math.PI * lat1/180
+        var radlat2 = Math.PI * lat2/180
+        var radlon1 = Math.PI * lon1/180
+        var radlon2 = Math.PI * lon2/180
+        var theta = lon1-lon2
+        var radtheta = Math.PI * theta/180
+        var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+        dist = Math.acos(dist)
+        dist = dist * 180/Math.PI
+        dist = dist * 60 * 1.1515
+        return dist
+
+		}
+
+	var distance = distance(lat1, lon1, lat2, lon2);
+
+	function tellDist(distance){
+		if (distance <= 20){
+			return "your property is close"
+		}else{ 
+			return "your property is far"
+		}
+	}
+
+	var tellDist = tellDist(distance)
+	document.getElementById("answer4").innerHTML = tellDist;
+	}
+
+</script>
+</body>
+</html>
+
