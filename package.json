@@ -10,8 +10,4 @@
   "devDependencies": {
     "mongoose": "^4.4.17"
   }
-    "engines": {
-     "node": "0.8.19",
-   "npm": "1.1.x"
-   }
 }
