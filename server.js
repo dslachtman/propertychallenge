@@ -21,5 +21,6 @@ require('./routes')(app);
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 
-app.listen(3001);
-console.log('Listening on port 3001...');
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
